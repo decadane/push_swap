@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:54:11 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/16 17:54:17 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/16 18:35:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,25 @@ static int		ft_push(int *a_stack, int *b_stack, int len)
 	return (1);
 }
 
+static void		ft_rev_array(int *stack, int len)
+{
+	int		arr[len];
+	int		i;
+
+	i = 0;
+	while (i < len)
+	{
+		arr[len - 1 - i] = stack[i];
+		i++;
+	}
+	i = 0;
+	while (i < len)
+	{
+		stack[i] = arr[i];
+		i++;
+	}
+}
+
 static int		ft_shift(int *stack, int len, int dir)
 {
 	int		i;
@@ -81,25 +100,6 @@ static int		ft_shift(int *stack, int len, int dir)
 	if (dir < 0)
 		ft_rev_array(stack, len);
 	return (1);
-}
-
-static void		ft_rev_array(int *stack, int len)
-{
-	int		arr[len];
-	int		i;
-
-	i = 0;
-	while (i < len)
-	{
-		arr[len - 1 - i] = stack[i];
-		i++;
-	}
-	i = 0;
-	while (i < len)
-	{
-		stack[i] = arr[i];
-		i++;
-	}
 }
 
 void			ft_call_function(int *a_stack, int *b_stack, char *cmd, int len)
