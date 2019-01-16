@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:29:36 by marvin            #+#    #+#             */
-/*   Updated: 2018/11/28 16:35:30 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/16 18:54:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_atoi(const char *str)
 		res = result;
 		result = result * 10 + (*str - '0');
 		if (res > result)
-			return (is_neg == -1 ? 0 : -1);
+			return (0);
 		str++;
 	}
 	return ((int)result * is_neg);
