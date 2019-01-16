@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 17:54:57 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/16 20:00:45 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/16 21:15:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	ft_print_stack(int *a_stack, int *b_stack, int len)
 	{
 		ft_putstr("   ");
 		ft_putnbr(a_stack[i]);
-		ft_putstr("\t\t  ");
+		ft_putstr("\t  ");
 		ft_putnbr(b_stack[i]);
 		ft_putstr("\n\n");
 		i++;
 	}
-	ft_putstr("Stack A\t\tStack B\n");
+	ft_putstr("Stack A\tStack B\n");
 }

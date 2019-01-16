@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:54:11 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/16 18:35:08 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/16 21:14:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ static int		ft_push(int *a_stack, int *b_stack, int len)
 	i = 0;
 	while (b_stack[i] == 0)
 	{
-		if (i == len - 1)
+		if (i == len)
 			break ;
 		i++;
 	}
-	b_stack[i] = tmp;
+	b_stack[i - 1] = tmp;
 	return (1);
 }
 
@@ -102,31 +102,31 @@ static int		ft_shift(int *stack, int len, int dir)
 	return (1);
 }
 
-void			ft_call_function(int *a_stack, int *b_stack, char *cmd, int len)
+void			ft_call_function(int *a_stack, int *b_stack, char *c, int len)
 {
-	if (ft_strcmp(cmd, "ss") || ft_strcmp(cmd, "sa") || ft_strcmp(cmd, "sb"))
+	if (!ft_strcmp(c, "ss\n") || !ft_strcmp(c, "sa\n") || !ft_strcmp(c, "sb\n"))
 	{
-		if (!ft_strcmp(cmd, "sb"))
+		if (!ft_strcmp(c, "sa\n") || !ft_strcmp(c, "ss\n"))
 			ft_swap(a_stack, len);
-		if (!ft_strcmp(cmd, "sa"))
+		if (!ft_strcmp(c, "sb\n") || !ft_strcmp(c, "ss\n"))
 			ft_swap(b_stack, len);
 	}
-	if (ft_strcmp(cmd, "pa"))
+	if (!ft_strcmp(c, "pa\n"))
 		ft_push(b_stack, a_stack, len);
-	if (ft_strcmp(cmd, "pb"))
+	if (!ft_strcmp(c, "pb\n"))
 		ft_push(a_stack, b_stack, len);
-	if (ft_strcmp(cmd, "rr") || ft_strcmp(cmd, "ra") || ft_strcmp(cmd, "rb"))
+	if (!ft_strcmp(c, "rr\n") || !ft_strcmp(c, "ra\n") || !ft_strcmp(c, "rb\n"))
 	{
-		if (!ft_strcmp(cmd, "rb"))
+		if (!ft_strcmp(c, "ra\n") || !ft_strcmp(c, "rr\n"))
 			ft_shift(a_stack, len, 1);
-		if (!ft_strcmp(cmd, "ra"))
+		if (!ft_strcmp(c, "rb\n") || !ft_strcmp(c, "rr\n"))
 			ft_shift(b_stack, len, 1);
 	}
-	if (ft_strcmp(cmd, "rrr") || ft_strcmp(cmd, "rra") || ft_strcmp(cmd, "rrb"))
+	if (!ft_strcmp(c, "rrr\n") || !ft_strcmp(c, "rra\n") || !ft_strcmp(c, "rrb\n"))
 	{
-		if (!ft_strcmp(cmd, "rrb"))
+		if (!ft_strcmp(c, "rra\n") || !ft_strcmp(c, "rrr\n"))
 			ft_shift(a_stack, len, -1);
-		if (!ft_strcmp(cmd, "rra"))
+		if (!ft_strcmp(c, "rrb\n") || !ft_strcmp(c, "rrr\n"))
 			ft_shift(b_stack, len, -1);
 	}
 }
