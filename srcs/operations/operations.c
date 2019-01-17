@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:54:11 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/16 21:14:01 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/17 19:12:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 
-static int		ft_swap(int *stack, int len)
+static int		ft_swap(t_e *stack, int len)
 {
 	int		tmp;
 	int		i;
@@ -20,63 +20,67 @@ static int		ft_swap(int *stack, int len)
 	i = 0;
 	if (len < 2)
 		return (0);
-	while (stack[i] == 0)
+	while (stack[i].edit == 0)
 	{
 		if (i == len - 2)
 			return (0);
 		i++;
 	}
-	tmp = stack[i];
-	stack[i] = stack[i + 1];
-	stack[i + 1] = tmp;
+	tmp = stack[i].elem;
+	stack[i].elem = stack[i + 1].elem;
+	stack[i + 1].elem = tmp;
 	return (1);
 }
 
-static int		ft_push(int *a_stack, int *b_stack, int len)
+static int		ft_push(t_e *a_stack, t_e *b_stack, int len)
 {
 	int		i;
 	int		tmp;
 
 	i = 0;
-	while (a_stack[i] == 0)
+	while (a_stack[i].edit == 0)
 	{
 		if (i == len - 1)
 			return (0);
 		i++;
 	}
-	tmp = a_stack[i];
-	a_stack[i] = 0;
+	tmp = a_stack[i].elem;
+	a_stack[i].elem = 0;
+	a_stack[i].edit = 0;
 	i = 0;
-	while (b_stack[i] == 0)
+	while (b_stack[i].edit == 0)
 	{
 		if (i == len)
 			break ;
 		i++;
 	}
-	b_stack[i - 1] = tmp;
+	b_stack[i - 1].elem = tmp;
+	b_stack[i - 1].edit = 1;
 	return (1);
 }
 
-static void		ft_rev_array(int *stack, int len)
+static void		ft_rev_array(t_e *stack, int len)
 {
-	int		arr[len];
+	t_e		arr[len];
 	int		i;
 
 	i = 0;
 	while (i < len)
 	{
-		arr[len - 1 - i] = stack[i];
+		arr[len - 1 - i].elem = stack[i].elem;
+		arr[len - 1 - i].edit = stack[i].edit;
 		i++;
 	}
 	i = 0;
 	while (i < len)
 	{
-		stack[i] = arr[i];
+		stack[i].elem = arr[i].elem;
+		stack[i].edit = arr[i].edit;
 		i++;
 	}
 }
 
-static int		ft_shift(int *stack, int len, int dir)
+static int		ft_shift(t_e *stack, int len, int dir)
 {
 	int		i;
 	int		tmp;
@@ -84,25 +88,25 @@ static int		ft_shift(int *stack, int len, int dir)
 	i = 0;
 	if (dir < 0)
 		ft_rev_array(stack, len);
-	while (stack[i] == 0)
+	while (stack[i].edit == 0)
 	{
 		if (i == len - 1)
 			return (0);
 		i++;
 	}
-	tmp = stack[i];
-	while (stack[i] != 0 && i <= len - 1)
+	tmp = stack[i].elem;
+	while (stack[i].edit != 0 && i <= len - 1)
 	{
-		stack[i] = stack[i + 1];
+		stack[i].elem = stack[i + 1].elem;
 		i++;
 	}
-	stack[i - 1] = tmp;
+	stack[i - 1].elem = tmp;
 	if (dir < 0)
 		ft_rev_array(stack, len);
 	return (1);
 }
 
-void			ft_call_function(int *a_stack, int *b_stack, char *c, int len)
+void			ft_call_function(t_e *a_stack, t_e *b_stack, char *c, int len)
 {
 	if (!ft_strcmp(c, "ss\n") || !ft_strcmp(c, "sa\n") || !ft_strcmp(c, "sb\n"))
 	{
@@ -122,7 +126,7 @@ void			ft_call_function(int *a_stack, int *b_stack, char *c, int len)
 		if (!ft_strcmp(c, "rb\n") || !ft_strcmp(c, "rr\n"))
 			ft_shift(b_stack, len, 1);
 	}
-	if (!ft_strcmp(c, "rrr\n") || !ft_strcmp(c, "rra\n") || !ft_strcmp(c, "rrb\n"))
+	else
 	{
 		if (!ft_strcmp(c, "rra\n") || !ft_strcmp(c, "rrr\n"))
 			ft_shift(a_stack, len, -1);

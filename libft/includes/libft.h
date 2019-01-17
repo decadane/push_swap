@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 10:51:06 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/07 17:27:41 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/17 19:09:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char				*ft_litoa(long long n, int *neg);
 char				*ft_itoa(int n);
 
 size_t				ft_strlen(const char *s);
-size_t              ft_strlen_len(const char *s, int len);
+size_t				ft_strlen_len(const char *s, int len);
 size_t				ft_strnlen(const char *s, size_t maxlen);
 char				*ft_strdup(const char *s1);
 char				*ft_strndup(const char *s1, size_t n);
