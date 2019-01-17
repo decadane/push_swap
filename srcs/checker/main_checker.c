@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 18:45:33 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/17 19:07:32 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/17 19:24:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static int		ft_exec_commands(t_e *a_stack, t_e *b_stack, int len)
 				break ;
 			i++;
 		}
+		if (*cmd == '\n')
+			break ;
 		if (ft_check_command(cmd))
 			ft_call_function(a_stack, b_stack, cmd, len);
 		else
 			return (ft_error_message());
-		if (*cmd == '\n')
-			break ;
 	}
 	ft_check_sort(a_stack, b_stack, len);
 	return (0);
@@ -68,7 +68,7 @@ int				main(int argc, char *argv[])
 	int		i;
 
 	if (argc < 2)
-		return (ft_error_message());
+		return (0);
 	i = 0;
 	ft_stack_init(b_stack, argc - 1);
 	while (i < argc - 1)
