@@ -6,23 +6,26 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 12:29:18 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/17 18:51:55 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/20 14:42:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_check_sort(t_e *a_stack, t_e *b_stack, int len)
+void	ft_check_sort(t_stack *a_stack, t_stack *b_stack)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
-	if (len < 2)
-		ft_putstr("[OK]\n");
-	while (i < len - 1)
+	if (a_stack->size < 2)
 	{
-		if ((a_stack[i + 1].elem < a_stack[i].elem && a_stack[i + 1].edit == 1
-				&& a_stack[i].edit == 1) || b_stack[i + 1].edit != 0)
+		ft_putstr("[OK]\n");
+		return ;
+	}
+	while (i < a_stack->size - 1)
+	{
+		if ((i >= a_stack->top && a_stack->elem[i + 1] < a_stack->elem[i])
+				|| b_stack->top != b_stack->size)
 		{
 			ft_putstr("[KO]\n");
 			return ;

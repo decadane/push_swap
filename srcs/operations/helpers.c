@@ -6,20 +6,20 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 17:54:57 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/17 18:49:51 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/20 14:31:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 
-int		ft_check_doubles(t_e *stack, int num, int len)
+int		ft_check_doubles(t_stack *stack, int num, int len)
 {
 	int		i;
 
 	i = 0;
 	while (i < len)
 	{
-		if (stack[i].elem == num && stack[i].edit == 1)
+		if (stack->elem[i] == num)
 			return (0);
 		i++;
 	}
@@ -54,35 +54,50 @@ int		ft_mini_atoi(char *str)
 	return (res);
 }
 
-void	ft_stack_init(t_e *a_stack, int len)
+t_stack	*ft_stack_init(size_t len)
 {
-	int		i;
+	t_stack	*stack;
+	size_t	i;
 
 	i = 0;
+	stack = (t_stack*)malloc(sizeof(t_stack));
+	stack->top = len;
+	stack->size = len;
+	stack->elem = (int*)malloc(sizeof(int) * len);
 	while (i < len)
 	{
-		a_stack[i].elem = 0;
-		a_stack[i].edit = 0;
+		stack->elem[i] = 0;
 		i++;
 	}
+	return (stack);
 }
 
-void	ft_print_stack(t_e *a_stack, t_e *b_stack, int len)
+void	ft_delete_stacks(t_stack *a_stack, t_stack *b_stack)
 {
-	int		i;
+	free(a_stack->elem);
+	free(a_stack);
+	a_stack = NULL;
+	free(b_stack->elem);
+	free(b_stack);
+	b_stack = NULL;
+}
+
+void	ft_print_stack(t_stack *a_stack, t_stack *b_stack)
+{
+	size_t	i;
 
 	i = 0;
 	ft_putchar('\n');
-	while (i < len)
+	while (i < a_stack->size)
 	{
 		ft_putstr("   ");
-		if (a_stack[i].edit != 0)
-			ft_putnbr(a_stack[i].elem);
+		if (i >= a_stack->top)
+			ft_putnbr(a_stack->elem[i]);
 		else
 			ft_putchar('.');
 		ft_putstr("\t  ");
-		if (b_stack[i].edit != 0)
-			ft_putnbr(b_stack[i].elem);
+		if (i >= b_stack->top)
+			ft_putnbr(b_stack->elem[i]);
 		else
 			ft_putchar('.');
 		ft_putstr("\n\n");

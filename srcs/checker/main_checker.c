@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 18:45:33 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/17 19:24:16 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/20 14:41:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		ft_error_message(void)
 	return (-1);
 }
 
-static int		ft_exec_commands(t_e *a_stack, t_e *b_stack, int len)
+static int		ft_exec_commands(t_stack *a_stack, t_stack *b_stack)
 {
 	char	cmd[5];
 	int		i;
@@ -53,35 +53,40 @@ static int		ft_exec_commands(t_e *a_stack, t_e *b_stack, int len)
 		if (*cmd == '\n')
 			break ;
 		if (ft_check_command(cmd))
-			ft_call_function(a_stack, b_stack, cmd, len);
+			ft_call_function(a_stack, b_stack, cmd);
 		else
 			return (ft_error_message());
 	}
-	ft_check_sort(a_stack, b_stack, len);
+	ft_check_sort(a_stack, b_stack);
 	return (0);
 }
 
 int				main(int argc, char *argv[])
 {
-	t_e		a_stack[argc - 1];
-	t_e		b_stack[argc - 1];
-	int		i;
+	t_stack		*a_stack;
+	t_stack		*b_stack;
+	size_t		i;
 
 	if (argc < 2)
 		return (0);
-	i = 0;
-	ft_stack_init(b_stack, argc - 1);
-	while (i < argc - 1)
+	i = -1;
+	a_stack = ft_stack_init(argc - 1);
+	b_stack = ft_stack_init(argc - 1);
+	while ((int)++i < argc - 1)
 	{
-		a_stack[i].elem = ft_check_valid_input(argv[i + 1]);
-		if (!ft_check_doubles(a_stack, a_stack[i].elem, i))
-			return (ft_error_message());
+		if (ft_check_valid_input(argv[i + 1]))
+		{
+			a_stack->elem[i] = ft_mini_atoi(argv[i + 1]);
+			a_stack->top--;
+		}
 		else
-			a_stack[i].edit = 1;
-		i++;
+			return (ft_error_message());
+		if (!ft_check_doubles(a_stack, a_stack->elem[i], i))
+			return (ft_error_message());
 	}
-	if (ft_exec_commands(a_stack, b_stack, argc - 1) == -1)
+	if (ft_exec_commands(a_stack, b_stack) == -1)
 		return (-1);
-	ft_print_stack(a_stack, b_stack, argc - 1);
+	ft_print_stack(a_stack, b_stack);
+	ft_delete_stacks(a_stack, b_stack);
 	return (0);
 }

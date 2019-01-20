@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 18:49:52 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/16 19:23:07 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/20 14:25:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int		ft_check_valid_input(char *str)
 			return (0);
 		i++;
 	}
-	return (ft_mini_atoi(str));
+	return (1);
 }
