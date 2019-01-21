@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 14:30:10 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/21 19:56:18 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/21 20:44:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int				main(int argc, char *argv[])
 	}
 	res = ft_quick_sort_a(a_stack, b_stack, a_stack->size);
 	ft_putstr(res);
-	ft_print_stack(a_stack, b_stack);
+//	ft_print_stack(a_stack, b_stack);
 	ft_delete_stacks(a_stack, b_stack);
 	free(res);
 	return (0);
