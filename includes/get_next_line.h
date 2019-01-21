@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/16 18:54:58 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/20 13:57:27 by marvin           ###   ########.fr       */
+/*   Created: 2018/11/30 15:50:28 by marvin            #+#    #+#             */
+/*   Updated: 2019/01/21 18:41:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
-
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 32
 # include "libft.h"
-# include "operations.h"
+# include <sys/stat.h>
+# include <fcntl.h>
 
-int				ft_check_valid_input(char *str);
-int				ft_check_doubles(t_stack *stack, int num, size_t i);
-void			ft_check_sort(t_stack *a_stack, t_stack *b_stack);
+typedef struct				s_tail_buffer
+{
+	int						fd;
+	char					*str;
+	struct s_tail_buffer	*next;
+	int						end;
+}							t_tail_buffer;
+
+int							get_next_line(const int fd, char **line);
 
 #endif

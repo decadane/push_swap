@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 18:45:33 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/20 14:41:08 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/21 19:54:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 static int		ft_check_command(char *cmd)
 {
-	return (!ft_strcmp(cmd, "sa\n") ||
-		!ft_strcmp(cmd, "sb\n") ||
-		!ft_strcmp(cmd, "ss\n") ||
-		!ft_strcmp(cmd, "pa\n") ||
-		!ft_strcmp(cmd, "pb\n") ||
-		!ft_strcmp(cmd, "ra\n") ||
-		!ft_strcmp(cmd, "rb\n") ||
-		!ft_strcmp(cmd, "rr\n") ||
-		!ft_strcmp(cmd, "rra\n") ||
-		!ft_strcmp(cmd, "rrb\n") ||
-		!ft_strcmp(cmd, "rrr\n"));
+	return (!ft_strcmp(cmd, "sa") ||
+		!ft_strcmp(cmd, "sb") ||
+		!ft_strcmp(cmd, "ss") ||
+		!ft_strcmp(cmd, "pa") ||
+		!ft_strcmp(cmd, "pb") ||
+		!ft_strcmp(cmd, "ra") ||
+		!ft_strcmp(cmd, "rb") ||
+		!ft_strcmp(cmd, "rr") ||
+		!ft_strcmp(cmd, "rra") ||
+		!ft_strcmp(cmd, "rrb") ||
+		!ft_strcmp(cmd, "rrr"));
 }
 
 static int		ft_error_message(void)
@@ -36,22 +36,10 @@ static int		ft_error_message(void)
 
 static int		ft_exec_commands(t_stack *a_stack, t_stack *b_stack)
 {
-	char	cmd[5];
-	int		i;
+	char	*cmd;
 
-	ft_bzero(cmd, 5);
-	while (1)
+	while (get_next_line(0, &cmd))
 	{
-		i = 0;
-		while (i < 5)
-		{
-			read(0, &(cmd[i]), 1);
-			if (cmd[i] == '\n')
-				break ;
-			i++;
-		}
-		if (*cmd == '\n')
-			break ;
 		if (ft_check_command(cmd))
 			ft_call_function(a_stack, b_stack, cmd);
 		else

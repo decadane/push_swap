@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:54:11 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/20 14:40:10 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/21 19:53:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int		ft_shift_up(t_stack *stack)
 		stack->elem[i] = stack->elem[i + 1];
 		i++;
 	}
-	stack->elem[stack->size] = tmp;
+	stack->elem[stack->size - 1] = tmp;
 	return (1);
 }
 
@@ -65,7 +65,7 @@ static int		ft_shift_down(t_stack *stack)
 		return (0);
 	tmp = stack->elem[stack->size - 1];
 	i = stack->size - 1;
-	while (i < stack->top - 1)
+	while (i > stack->top - 1)
 	{
 		stack->elem[i + 1] = stack->elem[i];
 		i--;
@@ -76,29 +76,29 @@ static int		ft_shift_down(t_stack *stack)
 
 void			ft_call_function(t_stack *a_stack, t_stack *b_stack, char *c)
 {
-	if (!ft_strcmp(c, "ss\n") || !ft_strcmp(c, "sa\n") || !ft_strcmp(c, "sb\n"))
+	if (!ft_strcmp(c, "ss") || !ft_strcmp(c, "sa") || !ft_strcmp(c, "sb"))
 	{
-		if (!ft_strcmp(c, "sa\n") || !ft_strcmp(c, "ss\n"))
+		if (!ft_strcmp(c, "sa") || !ft_strcmp(c, "ss"))
 			ft_swap(a_stack);
-		if (!ft_strcmp(c, "sb\n") || !ft_strcmp(c, "ss\n"))
+		if (!ft_strcmp(c, "sb") || !ft_strcmp(c, "ss"))
 			ft_swap(b_stack);
 	}
-	if (!ft_strcmp(c, "pa\n"))
+	if (!ft_strcmp(c, "pa"))
 		ft_push(b_stack, a_stack);
-	if (!ft_strcmp(c, "pb\n"))
+	if (!ft_strcmp(c, "pb"))
 		ft_push(a_stack, b_stack);
-	if (!ft_strcmp(c, "rr\n") || !ft_strcmp(c, "ra\n") || !ft_strcmp(c, "rb\n"))
+	if (!ft_strcmp(c, "rr") || !ft_strcmp(c, "ra") || !ft_strcmp(c, "rb"))
 	{
-		if (!ft_strcmp(c, "ra\n") || !ft_strcmp(c, "rr\n"))
+		if (!ft_strcmp(c, "ra") || !ft_strcmp(c, "rr"))
 			ft_shift_up(a_stack);
-		if (!ft_strcmp(c, "rb\n") || !ft_strcmp(c, "rr\n"))
+		if (!ft_strcmp(c, "rb") || !ft_strcmp(c, "rr"))
 			ft_shift_up(b_stack);
 	}
 	else
 	{
-		if (!ft_strcmp(c, "rra\n") || !ft_strcmp(c, "rrr\n"))
+		if (!ft_strcmp(c, "rra") || !ft_strcmp(c, "rrr"))
 			ft_shift_down(a_stack);
-		if (!ft_strcmp(c, "rrb\n") || !ft_strcmp(c, "rrr\n"))
+		if (!ft_strcmp(c, "rrb") || !ft_strcmp(c, "rrr"))
 			ft_shift_down(b_stack);
 	}
 }
