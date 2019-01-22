@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:54:11 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/21 19:53:05 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/22 20:14:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ static int		ft_shift_down(t_stack *stack)
 	if (stack->size < 2)
 		return (0);
 	tmp = stack->elem[stack->size - 1];
-	i = stack->size - 1;
-	while (i > stack->top - 1)
+	i = stack->size;
+	while (i > stack->top)
 	{
-		stack->elem[i + 1] = stack->elem[i];
+		stack->elem[i] = stack->elem[i - 1];
 		i--;
 	}
 	stack->elem[stack->top] = tmp;
