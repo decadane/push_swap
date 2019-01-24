@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:46:13 by marvin            #+#    #+#             */
-/*   Updated: 2018/12/20 17:12:00 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/24 20:43:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	unsigned int		i;
-	char				*result;
-	char				*point;
+	size_t	i;
+	char	*result;
+	char	*point;
 
 	i = 0;
 	if (!s || len == 2147483647)
 		return (NULL);
-	result = (char*)malloc((int)len + 1);
+	result = (char*)malloc(len + 1);
 	if (result == NULL)
 		return (NULL);
 	point = result;
@@ -31,7 +31,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	i = 0;
-	while (i < (unsigned int)len)
+	while (i < len)
 	{
 		*(point + i) = *(s + i);
 		i++;

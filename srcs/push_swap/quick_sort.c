@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 16:39:24 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/22 21:55:14 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/24 21:14:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_quick_sort_b(t_stack *a_stack, t_stack *b_stack, size_t n)
 	char	*res;
 
 	rot_count = 0;
-	res = ft_strnew(0);
+	res = ft_strnew(1);
 	push_count = 0;
 	i = -1;
 	if (n == 1)
@@ -30,7 +30,25 @@ char	*ft_quick_sort_b(t_stack *a_stack, t_stack *b_stack, size_t n)
 		res = ft_strjoin(res, ft_strdup("pa\n"));
 		return (res);
 	}
+	if (n == 2)
+	{
+		if (b_stack->elem[b_stack->top] < b_stack->elem[b_stack->top + 1])
+		{
+			ft_call_function(a_stack, b_stack, "sb");
+			ft_call_function(a_stack, b_stack, "pa");
+			ft_call_function(a_stack, b_stack, "pa");
+			res = ft_strjoin(res, ft_strdup("sb\npa\npa\n"));
+		}
+		else
+		{
+			ft_call_function(a_stack, b_stack, "pa");
+			ft_call_function(a_stack, b_stack, "pa");
+			res = ft_strjoin(res, ft_strdup("pa\npa\n"));
+		}
+		return (res);
+	}
 	pivot = ft_select_median(b_stack, n);
+//	pivot = (b_stack->elem[b_stack->top] + b_stack->elem[b_stack->top + n - 1]) / 2.0;
 //	printf("Pivot: %f\n", pivot);
 	while (++i < (int)n)
 	{
@@ -72,13 +90,23 @@ char	*ft_quick_sort_a(t_stack *a_stack, t_stack *b_stack, size_t n)
 	int		push_count;
 	char	*res;
 
-	res = ft_strnew(0);
+	res = ft_strnew(1);
 	rot_count = 0;
 	push_count = 0;
 	i = -1;
 	if (n == 1)
 		return (res);
+	if (n == 2)
+	{
+		if (a_stack->elem[a_stack->top] > a_stack->elem[a_stack->top + 1])
+		{
+			ft_call_function(a_stack, b_stack, "sa");
+			res = ft_strjoin(res, ft_strdup("sa\n"));
+		}
+		return (res);
+	}
 	pivot = ft_select_median(a_stack, n);
+//	pivot = (a_stack->elem[a_stack->top] + a_stack->elem[a_stack->top + n - 1]) / 2.0;
 //	printf("Pivot: %f\n", pivot);
 	while (++i < (int)n)
 	{
