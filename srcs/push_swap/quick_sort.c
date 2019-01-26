@@ -6,83 +6,95 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 16:39:24 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/24 21:14:56 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/26 18:39:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	*ft_quick_sort_b(t_stack *a_stack, t_stack *b_stack, size_t n)
+static char	*ft_stack_spec_cases(t_stack *a_s, t_stack *b_s, char c)
 {
-	float	pivot;
-	int		i;
-	int		rot_count;
-	int		push_count;
 	char	*res;
 
-	rot_count = 0;
 	res = ft_strnew(1);
-	push_count = 0;
-	i = -1;
-	if (n == 1)
+	if (b_s->elem[b_s->top] < b_s->elem[b_s->top + 1] && c == 'b')
 	{
-		ft_call_function(a_stack, b_stack, "pa");
-		res = ft_strjoin(res, ft_strdup("pa\n"));
-		return (res);
+		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "sb\n")));
+		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "pa\n")));
+		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "pa\n")));
 	}
-	if (n == 2)
+	else if (c == 'b')
 	{
-		if (b_stack->elem[b_stack->top] < b_stack->elem[b_stack->top + 1])
-		{
-			ft_call_function(a_stack, b_stack, "sb");
-			ft_call_function(a_stack, b_stack, "pa");
-			ft_call_function(a_stack, b_stack, "pa");
-			res = ft_strjoin(res, ft_strdup("sb\npa\npa\n"));
-		}
-		else
-		{
-			ft_call_function(a_stack, b_stack, "pa");
-			ft_call_function(a_stack, b_stack, "pa");
-			res = ft_strjoin(res, ft_strdup("pa\npa\n"));
-		}
-		return (res);
+		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "pa\n")));
+		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "pa\n")));
 	}
-	pivot = ft_select_median(b_stack, n);
-//	pivot = (b_stack->elem[b_stack->top] + b_stack->elem[b_stack->top + n - 1]) / 2.0;
-//	printf("Pivot: %f\n", pivot);
-	while (++i < (int)n)
-	{
-//		ft_print_stack(a_stack, b_stack);
-//		getchar();
-		if (b_stack->elem[b_stack->top] < pivot)
-		{
-			ft_call_function(a_stack, b_stack, "rb");
-			res = ft_strjoin(res, ft_strdup("rb\n"));
-			rot_count++;
-		}
-		else
-		{
-			ft_call_function(a_stack, b_stack, "pa");
-			res = ft_strjoin(res, ft_strdup("pa\n"));
-			push_count++;
-		}
-	}
-//		ft_print_stack(a_stack, b_stack);
-//		getchar();
-	if (push_count > 0)
-		res = ft_strjoin(res, ft_quick_sort_a(a_stack, b_stack, push_count));
-	i = -1;
-	while (++i < rot_count)
-	{
-		ft_call_function(a_stack, b_stack, "rrb");
-		res = ft_strjoin(res, ft_strdup("rrb\n"));
-	}
-	if (rot_count > 0)
-		res = ft_strjoin(res, ft_quick_sort_b(a_stack, b_stack, rot_count));
+	if (a_s->elem[a_s->top] > a_s->elem[a_s->top + 1] && c == 'a')
+		return (ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "sa\n"))));
 	return (res);
 }
 
-char	*ft_quick_sort_a(t_stack *a_stack, t_stack *b_stack, size_t n)
+char		*ft_quick_sort_b(t_stack *a_s, t_stack *b_s, size_t n)
+{
+	float	pivot;
+	int		i;
+	int		rot_count;
+	int		push_count;
+	char	*res;
+
+	rot_count = 0;
+	res = ft_strnew(1);
+	push_count = 0;
+	i = -1;
+	if (n == 1)
+		return (ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "pa\n"))));
+	if (n == 2)
+		return (ft_strjoin(res, ft_stack_spec_cases(a_s, b_s, 'b')));
+	pivot = ft_select_median(b_s, n);
+	while (++i < (int)n)
+	{
+		if (b_s->elem[b_s->top] < pivot && ++rot_count)
+			res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "rb\n")));
+		else if (++push_count)
+			res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "pa\n")));
+	}
+	return (ft_strjoin(res, ft_split_sort_b(a_s, b_s, rot_count, push_count)));
+}
+
+char		*ft_split_sort_b(t_stack *a_s, t_stack *b_s, int rot_count,
+		int push_count)
+{
+	int		i;
+	char	*res;
+
+	res = ft_strnew(1);
+	if (push_count > 0)
+		res = ft_strjoin(res, ft_quick_sort_a(a_s, b_s, push_count));
+	i = -1;
+	while (++i < rot_count)
+		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "rrb\n")));
+	if (rot_count > 0)
+		res = ft_strjoin(res, ft_quick_sort_b(a_s, b_s, rot_count));
+	return (res);
+}
+
+static char	*ft_split_sort_a(t_stack *a_s, t_stack *b_s, int rot_count,
+		int push_count)
+{
+	int		i;
+	char	*res;
+
+	res = ft_strnew(1);
+	i = -1;
+	while (++i < rot_count)
+		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "rra\n")));
+	if (rot_count > 0)
+		res = ft_strjoin(res, ft_quick_sort_a(a_s, b_s, rot_count));
+	if (push_count > 0)
+		res = ft_strjoin(res, ft_quick_sort_b(a_s, b_s, push_count));
+	return (res);
+}
+
+char		*ft_quick_sort_a(t_stack *a_s, t_stack *b_s, size_t n)
 {
 	float	pivot;
 	int		i;
@@ -97,46 +109,14 @@ char	*ft_quick_sort_a(t_stack *a_stack, t_stack *b_stack, size_t n)
 	if (n == 1)
 		return (res);
 	if (n == 2)
-	{
-		if (a_stack->elem[a_stack->top] > a_stack->elem[a_stack->top + 1])
-		{
-			ft_call_function(a_stack, b_stack, "sa");
-			res = ft_strjoin(res, ft_strdup("sa\n"));
-		}
-		return (res);
-	}
-	pivot = ft_select_median(a_stack, n);
-//	pivot = (a_stack->elem[a_stack->top] + a_stack->elem[a_stack->top + n - 1]) / 2.0;
-//	printf("Pivot: %f\n", pivot);
+		return (ft_strjoin(res, ft_stack_spec_cases(a_s, b_s, 'a')));
+	pivot = ft_select_median(a_s, n);
 	while (++i < (int)n)
 	{
-//		ft_print_stack(a_stack, b_stack);
-//		getchar();
-		if (a_stack->elem[a_stack->top] < pivot)
-		{
-			ft_call_function(a_stack, b_stack, "pb");
-			res = ft_strjoin(res, ft_strdup("pb\n"));
-			push_count++;
-		}
-		else
-		{
-			ft_call_function(a_stack, b_stack, "ra");
-			res = ft_strjoin(res, ft_strdup("ra\n"));
-			rot_count++;
-		}
+		if (a_s->elem[a_s->top] < pivot && ++push_count)
+			res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "pb\n")));
+		else if (++rot_count)
+			res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "ra\n")));
 	}
-	i = 0;
-	while (i < rot_count)
-	{
-		ft_call_function(a_stack, b_stack, "rra");
-		res = ft_strjoin(res, ft_strdup("rra\n"));
-		i++;
-	}
-//		ft_print_stack(a_stack, b_stack);
-//		getchar();
-	if (rot_count > 0)
-		res = ft_strjoin(res, ft_quick_sort_a(a_stack, b_stack, rot_count));
-	if (push_count > 0)
-		res = ft_strjoin(res, ft_quick_sort_b(a_stack, b_stack, push_count));
-	return (res);
+	return (ft_strjoin(res, ft_split_sort_a(a_s, b_s, rot_count, push_count)));
 }

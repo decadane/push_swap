@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 13:15:31 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/22 16:10:44 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/26 14:56:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,26 @@
 int		ft_select_median(t_stack *stack, int n)
 {
 	int		*arr;
-	int		i;
-	int		o;
+	int		i[2];
 	int		tmp;
 
-	i = 0;
+	i[0] = -1;
 	arr = (int*)malloc(sizeof(int) * n);
-	while (i < n)
+	while (++i[0] < n)
+		arr[i[0]] = stack->elem[stack->top + i[0]];
+	i[0] = -1;
+	while (++i[0] < n)
 	{
-		arr[i] = stack->elem[stack->top + i];
-		i++;
-	}
-	i = 0;
-	while (i < n)
-	{
-		o = 0;
-		while (o < n - 1 - i)
+		i[1] = -1;
+		while (++i[1] < n - 1 - i[0])
 		{
-			if (arr[o] > arr[o + 1])
+			if (arr[i[1]] > arr[i[1] + 1])
 			{
-				tmp = arr[o];
-				arr[o] = arr[o + 1];
-				arr[o + 1] = tmp;
+				tmp = arr[i[1]];
+				arr[i[1]] = arr[i[1] + 1];
+				arr[i[1] + 1] = tmp;
 			}
-			o++;
 		}
-		i++;
 	}
 	tmp = arr[n / 2];
 	free(arr);

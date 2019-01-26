@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 15:23:14 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/22 20:10:13 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/26 14:05:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_stack
 	size_t		size;
 }				t_stack;
 
-void			ft_call_function(t_stack *a_stack, t_stack *b_stack, char *c);
+char			*ft_call_ft(t_stack *a_stack, t_stack *b_stack, char *c);
 
 t_stack			*ft_copy_stack(t_stack *stack);
 t_stack			*ft_stack_init(size_t len);

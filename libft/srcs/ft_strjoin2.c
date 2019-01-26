@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_sort_stack.c                                 :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/22 13:54:18 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/26 18:26:52 by marvin           ###   ########.fr       */
+/*   Created: 2018/11/24 17:55:51 by marvin            #+#    #+#             */
+/*   Updated: 2019/01/26 14:25:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int		ft_check_sort_stack(t_stack *stack, int dir, int n)
+char	*ft_strjoin2(char *s1, char *s2)
 {
-	size_t	i;
+	char	*result;
+	int		i;
+	int		j;
 
 	i = 0;
-	if (stack->size < 2)
-		return (1);
-	while ((int)i < n)
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	if (!(result = (char*)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+		exit(-20);
+	while (s1[i])
 	{
-		if (dir > 0)
-		{
-			if ((i >= stack->top && stack->elem[i + 1] < stack->elem[i]))
-				return (0);
-		}
-		else
-		{
-			if ((i >= stack->top && stack->elem[i + 1] > stack->elem[i]))
-				return (0);
-		}
+		result[i + j] = s1[i];
 		i++;
 	}
-	return (1);
+	while (s2[j])
+	{
+		result[i + j] = s2[j];
+		j++;
+	}
+	result[i + j] = '\0';
+	return (result);
 }
