@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/18 17:04:30 by marvin            #+#    #+#              #
-#    Updated: 2019/01/21 14:38:38 by marvin           ###   ########.fr        #
+#    Updated: 2019/01/26 19:17:10 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,10 @@ OBJ_OPER = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/operatio
 
 LIB = libft/libft.a
 
-all: make_lib $(NAME_PUSH) $(NAME_CHECK)
+all: makedir make_lib $(NAME_PUSH) $(NAME_CHECK)
+
+makedir:
+	@mkdir bin
 
 make_lib:
 	make -C libft/
@@ -40,8 +43,8 @@ bin/%.o: %.c
 	gcc $(FLAGS) -c $< -o $@ -Iincludes -Ilibft/includes
 
 clean:
-	rm -f bin/*.o
-	rm -f libft/bin/*.o
+	rm -rf bin/
+	rm -rf libft/bin/
 
 fclean: clean
 	rm -f $(NAME_PUSH)
