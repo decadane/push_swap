@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/18 17:04:30 by marvin            #+#    #+#              #
-#    Updated: 2019/01/26 19:17:31 by marvin           ###   ########.fr        #
+#    Updated: 2019/01/26 19:27:13 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/*.c))))
 all: makedir $(NAME)
 
 makedir:
-	@mkdir bin
+	@mkdir -p bin
 
 $(NAME): $(OBJ)
 	ar rc $@ $^
