@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/18 17:04:30 by marvin            #+#    #+#              #
-#    Updated: 2019/01/26 19:27:15 by marvin           ###   ########.fr        #
+#    Updated: 2019/01/26 19:43:11 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ FLAGS = -Wall -Wextra -Werror
 OBJ_PUSH = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/push_swap/*.c))))
 OBJ_CHECK = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/checker/*.c))))
 OBJ_OPER = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/operations/*.c))))
+
+HEADERS = $(wildcard includes/*.h)
 
 LIB = libft/libft.a
 
@@ -39,7 +41,7 @@ $(NAME_PUSH): $(OBJ_PUSH) $(OBJ_OPER) $(LIB)
 $(NAME_CHECK): $(OBJ_CHECK) $(OBJ_OPER) $(LIB)
 	gcc $(FLAGS) $^ -o $@ -Iincludes -Ilibft/includes -Llibft -lft
 
-bin/%.o: %.c
+bin/%.o: %.c $(HEADERS)
 	gcc $(FLAGS) -c $< -o $@ -Iincludes -Ilibft/includes
 
 clean:

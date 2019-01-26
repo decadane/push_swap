@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:43:22 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/26 18:26:41 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/26 19:39:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft.h"
 # include "checker.h"
-# include <stdio.h>
 
 # define MAX(x, y) x > y ? x : y
 # define MIN(x, y) x < y ? x : y

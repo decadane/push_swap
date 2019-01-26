@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 15:23:14 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/26 14:05:39 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/26 19:38:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define OPERATIONS_H
 
 # include "libft.h"
-# include <stdio.h>
 
 typedef struct	s_stack
 {
@@ -30,7 +29,5 @@ t_stack			*ft_stack_init(size_t len);
 void			ft_delete_stacks(t_stack *a_stack, t_stack *b_stack);
 void			ft_print_stack(t_stack *a_stack, t_stack *b_stack);
 int				ft_mini_atoi(char *str);
-
-void			ft_print(t_stack *stack);
 
 #endif

@@ -6,15 +6,15 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 18:54:58 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/21 18:43:04 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/26 19:43:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# include "libft.h"
 # include "operations.h"
+# include "libft.h"
 # include "get_next_line.h"
 
 int				get_next_line(const int fd, char **line);

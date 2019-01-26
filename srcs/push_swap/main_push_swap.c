@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 14:30:10 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/26 18:50:44 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/26 19:37:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void		ft_print_string(char *str)
 {
 	str = ft_parse_string(str);
 	ft_putstr(str);
+	free(str);
 }
 
 static int		ft_error_message(void)
