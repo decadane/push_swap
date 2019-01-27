@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 10:51:06 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/26 14:25:06 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/27 14:01:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_sqrt(int a);
 int					ft_max(int a, int b);
+int					ft_count_symb(char *str, char c);
 unsigned long long	ft_power(int num, int power);
 
 int					ft_atoi(const char *str);

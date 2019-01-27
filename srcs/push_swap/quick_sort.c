@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 16:39:24 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/26 18:39:23 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/27 17:45:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*ft_stack_spec_cases(t_stack *a_s, t_stack *b_s, char c)
 	char	*res;
 
 	res = ft_strnew(1);
-	if (b_s->elem[b_s->top] < b_s->elem[b_s->top + 1] && c == 'b')
+	if (c == 'b' && b_s->elem[b_s->top] < b_s->elem[b_s->top + 1])
 	{
 		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "sb\n")));
 		res = ft_strjoin(res, ft_strdup(ft_call_ft(a_s, b_s, "pa\n")));

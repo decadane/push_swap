@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 17:54:57 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/26 19:06:03 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/27 17:40:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,36 +72,36 @@ t_stack	*ft_stack_init(size_t len)
 	return (stack);
 }
 
-void	ft_delete_stacks(t_stack *a_stack, t_stack *b_stack)
+t_stack	*ft_copy_stack(t_stack *stack)
 {
-	free(a_stack->elem);
-	free(a_stack);
-	a_stack = NULL;
-	free(b_stack->elem);
-	free(b_stack);
-	b_stack = NULL;
-}
-
-void	ft_print_stack(t_stack *a_stack, t_stack *b_stack)
-{
+	t_stack	*new_stack;
 	size_t	i;
 
 	i = 0;
-	ft_putchar('\n');
-	while (i < a_stack->size)
+	new_stack = (t_stack*)malloc(sizeof(t_stack));
+	new_stack->top = stack->top;
+	new_stack->size = stack->size;
+	new_stack->elem = (int*)malloc(sizeof(int) * stack->size);
+	while (i < stack->size)
 	{
-		if (i >= a_stack->top)
-			ft_putnbr(a_stack->elem[i]);
-		else
-			ft_putchar('.');
-		ft_putstr("\t");
-		if (i >= b_stack->top)
-			ft_putnbr(b_stack->elem[i]);
-		else
-			ft_putchar('.');
-		ft_putstr("\n");
+		new_stack->elem[i] = stack->elem[i];
 		i++;
 	}
-	ft_putstr("-\t-\n");
-	ft_putstr("a\tb\n");
+	return (new_stack);
+}
+
+void	ft_delete_stacks(t_stack *a_stack, t_stack *b_stack)
+{
+	if (a_stack)
+	{
+		free(a_stack->elem);
+		free(a_stack);
+		a_stack = NULL;
+	}
+	if (b_stack)
+	{
+		free(b_stack->elem);
+		free(b_stack);
+		b_stack = NULL;
+	}
 }
