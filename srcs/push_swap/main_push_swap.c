@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 14:30:10 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/27 17:42:18 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/27 19:20:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static char		*ft_choose_solv(t_stack *a_stack, t_stack *b_stack)
 static int		ft_error_message(void)
 {
 	ft_putstr_fd("Error\n", 2);
+	exit(-20);
 	return (-1);
 }
 
